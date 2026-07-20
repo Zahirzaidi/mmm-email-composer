@@ -12,9 +12,7 @@ services:
       - key: RESEND_API_KEY
         sync: false
       - key: RESEND_FROM_EMAIL
-        sync: false
-      - key: PUBLIC_APP_URL
-        sync: false
+        value: Majlis Media Malaysia <no-reply@majlismediatest.my>
       - key: SUPABASE_URL
         sync: false
       - key: SUPABASE_SERVICE_ROLE_KEY

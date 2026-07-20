@@ -46,8 +46,8 @@ app.get("/health", (req, res) => {
     res.json({
         ok: true,
         storage: getSupabaseAdmin() ? "supabase" : "local-json",
-        publicAppUrl: Boolean(getRuntimeEnv("PUBLIC_APP_URL")),
-        resendConfigured: Boolean(process.env.RESEND_API_KEY),
+        publicAppUrl: Boolean(getRuntimeEnv("PUBLIC_APP_URL") || process.env.RENDER_EXTERNAL_URL),
+        resendConfigured: Boolean(getRuntimeEnv("RESEND_API_KEY")),
         authEnabled: authEnabled(),
         time: new Date().toISOString()
     });
@@ -247,7 +247,7 @@ app.use((req, res, next) => {
 
 app.use(express.static(path.join(__dirname, "public")));
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend(getRuntimeEnv("RESEND_API_KEY"));
 
 /*
 |--------------------------------------------------------------------------
@@ -303,8 +303,8 @@ function getSupabaseAdmin() {
 
     }
 
-    const url = process.env.SUPABASE_URL || getPublicSupabaseUrl();
-    const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || "";
+    const url = getRuntimeEnv("SUPABASE_URL") || getPublicSupabaseUrl();
+    const serviceKey = getRuntimeEnv("SUPABASE_SERVICE_ROLE_KEY");
 
     supabaseAdmin = url && serviceKey
         ? createClient(url, serviceKey, {
@@ -1104,7 +1104,7 @@ function generateEmail(data = {}, options = {}) {
 
 async function sendEmailBatch(data = {}, trackingBaseUrl = "") {
 
-    if (!process.env.RESEND_API_KEY) {
+    if (!getRuntimeEnv("RESEND_API_KEY")) {
 
         const err = new Error("RESEND_API_KEY is missing in .env.");
         err.statusCode = 500;
