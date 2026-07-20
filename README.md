@@ -2,6 +2,8 @@
 
 Web-based email composer for Majlis Media Malaysia.
 
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/Zahirzaidi/mmm-email-composer)
+
 ## Features
 
 - Select recipients from Supabase categories, groups, and members.
