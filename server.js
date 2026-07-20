@@ -1157,7 +1157,7 @@ async function sendEmailBatch(data = {}, trackingBaseUrl = "") {
 
         const { data: resendData, error } = await resend.emails.send({
 
-            from: process.env.RESEND_FROM_EMAIL || "onboarding@resend.dev",
+            from: getRuntimeEnv("RESEND_FROM_EMAIL") || "onboarding@resend.dev",
 
             to: recipient,
 
