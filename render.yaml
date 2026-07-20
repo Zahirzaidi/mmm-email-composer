@@ -13,7 +13,7 @@ services:
       - key: RESEND_API_KEY
         sync: false
       - key: RESEND_FROM_EMAIL
-        value: Majlis Media Malaysia <no-reply@majlismediatest.my>
+        value: onboarding@resend.dev
       - key: SUPABASE_URL
         sync: false
       - key: SUPABASE_SERVICE_ROLE_KEY
