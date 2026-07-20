@@ -56,6 +56,8 @@ PUBLIC_APP_URL=https://your-hosted-app-domain
 
 This value must stay stable because email open tracking pixels use it. On Render, the app can also use `RENDER_EXTERNAL_URL`, which Render sets automatically for web services.
 
+For production use, prefer a paid always-on web service. Render Free web services can spin down after inactivity, which may delay the first request after idle.
+
 ## 4. Admin Login
 
 Set an admin password in hosting:
