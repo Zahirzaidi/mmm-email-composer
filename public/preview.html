@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Preview</title>
+    <script>
+    const savedTheme = localStorage.getItem("mmmTheme");
+    if (savedTheme) {
+        document.documentElement.dataset.theme = savedTheme;
+    }
+    </script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+<header class="header">
+
+<div class="logo">
+<img
+src="https://majlismedia.my/mmm-logo.png"
+alt="MMM Logo">
+</div>
+
+<div class="company-name">
+MAJLIS MEDIA MALAYSIA
+</div>
+
+<nav class="top-nav">
+<a href="email.html">Compose</a>
+<a href="analytics.html">Analytics</a>
+<a href="history.html">History</a>
+<button type="button" class="theme-toggle" data-theme-toggle>Dark</button>
+</nav>
+
+</header>
+
+<div class="card">
+
+<h2>
+Email Preview
+</h2>
+
+<div class="preview-summary">
+<h3>
+Recipient(s)
+</h3>
+<div id="previewRecipients">
+Loading...
+</div>
+</div>
+
+<div class="preview-summary">
+<h3>
+Subject
+</h3>
+<div id="previewSubject">
+Loading...
+</div>
+</div>
+
+<div class="iframe-container">
+<iframe
+id="previewFrame"
+title="Email preview">
+</iframe>
+</div>
+
+<div class="preview-buttons">
+<button
+id="backBtn">
+&larr; Back
+</button>
+
+<button
+id="sendBtn">
+Send Email
+</button>
+</div>
+
+</div>
+
+</div>
+
+<script src="preview.js"></script>
+
+<script src="theme.js"></script>
+
+</body>
+
+</html>

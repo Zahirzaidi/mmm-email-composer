@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MMM Email Login</title>
+    <script>
+    const savedTheme = localStorage.getItem("mmmTheme");
+    if (savedTheme) {
+        document.documentElement.dataset.theme = savedTheme;
+    }
+    </script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="success-card login-card">
+
+<div class="logo login-logo">
+<img
+src="https://majlismedia.my/mmm-logo.png"
+alt="MMM Logo">
+</div>
+
+<h1>
+MMM Email Admin
+</h1>
+
+<p>
+Sign in to manage email campaigns.
+</p>
+
+<form
+method="post"
+action="/login"
+class="login-form">
+
+<div class="input-group">
+<label for="password">
+Admin Password
+</label>
+<input
+type="password"
+id="password"
+name="password"
+required
+autocomplete="current-password"
+placeholder="Enter password">
+</div>
+
+<button type="submit">
+Login
+</button>
+
+</form>
+
+<p class="login-error" id="loginError">
+Invalid password.
+</p>
+
+</div>
+
+<script src="theme.js"></script>
+<script>
+if (!new URLSearchParams(window.location.search).has("error")) {
+    document.getElementById("loginError").style.display = "none";
+}
+</script>
+
+</body>
+
+</html>

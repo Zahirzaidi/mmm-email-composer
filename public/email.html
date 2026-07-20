@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>MMM Email</title>
+
+    <script>
+    const savedTheme = localStorage.getItem("mmmTheme");
+    if (savedTheme) {
+        document.documentElement.dataset.theme = savedTheme;
+    }
+    </script>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- ==========================================
+HEADER
+========================================== -->
+
+<header class="header">
+
+<div class="logo">
+
+<img
+src="https://majlismedia.my/mmm-logo.png"
+alt="MMM Logo">
+
+</div>
+
+<div class="company-name">
+
+MAJLIS MEDIA MALAYSIA
+
+</div>
+
+<nav class="top-nav">
+<a href="email.html" class="active">Compose</a>
+<a href="analytics.html">Analytics</a>
+<a href="history.html">History</a>
+<button type="button" class="theme-toggle" data-theme-toggle>Dark</button>
+</nav>
+
+</header>
+
+<!-- ==========================================
+RECIPIENT VIEW
+========================================== -->
+
+<section
+id="recipientView"
+class="view">
+
+<div class="card">
+
+<h2>
+
+Select Recipient
+
+</h2>
+
+<div class="radio-group">
+
+<label>
+
+<input
+type="radio"
+name="recipientType"
+value="individual"
+checked>
+
+Individual
+
+</label>
+
+<label>
+
+<input
+type="radio"
+name="recipientType"
+value="category">
+
+Category
+
+</label>
+
+</div>
+
+<!-- =========================
+INDIVIDUAL
+========================= -->
+
+<div id="individualBox">
+
+<div class="input-group">
+
+<label>
+
+Recipient Email
+
+</label>
+
+<input
+type="email"
+id="recipientEmail"
+placeholder="example@email.com">
+
+</div>
+
+<div class="input-group">
+
+<label>
+
+Recipient Name
+
+</label>
+
+<input
+type="text"
+id="individualRecipientName"
+placeholder="Recipient Name">
+
+</div>
+
+</div>
+
+<!-- =========================
+CATEGORY
+========================= -->
+
+<div
+id="categoryBox"
+style="display:none;">
+
+<h3>
+
+Category
+
+</h3>
+
+<div
+id="categoryGrid"
+class="category-grid">
+
+<!-- JavaScript -->
+
+</div>
+
+<div
+id="groupSection"
+style="display:none;">
+
+<h3>
+
+Group
+
+</h3>
+
+<div
+id="groupGrid"
+class="group-grid">
+
+<!-- JavaScript -->
+
+</div>
+
+</div>
+
+<!-- ==========================================
+MEMBER SECTION
+========================================== -->
+
+<div
+id="memberSection"
+style="display:none;">
+
+<h3>
+
+Members
+
+</h3>
+
+<div class="member-toolbar">
+
+<input
+type="text"
+id="searchMember"
+placeholder="Search member...">
+
+<label>
+
+<input
+type="checkbox"
+id="selectAll">
+
+Select All
+
+</label>
+
+</div>
+
+<div class="member-table">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th width="60"></th>
+
+<th>Name</th>
+
+<th>Email</th>
+
+<th>Position</th>
+
+</tr>
+
+</thead>
+
+<tbody id="memberTable">
+
+<!-- JavaScript -->
+
+</tbody>
+
+</table>
+
+</div>
+
+<div class="selected-counter">
+
+Selected :
+
+<span id="selectedCount">
+
+0 Members
+
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="button-area">
+
+<button
+id="nextBtn">
+
+Next &rarr;
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ==========================================
+COMPOSER VIEW
+========================================== -->
+
+<section
+id="composerView"
+class="view"
+style="display:none;">
+
+<div class="card">
+
+<button
+id="changeRecipient"
+class="back-button">
+
+&larr; Change Recipient
+
+</button>
+
+<h2>
+
+Compose Email
+
+</h2>
+
+<div class="recipient-summary">
+
+<h3>
+
+Recipient(s)
+
+</h3>
+
+<div id="recipientSummary">
+
+<!-- JavaScript -->
+
+</div>
+
+</div>
+
+<div class="input-group">
+
+<label>
+
+Subject
+
+</label>
+
+<input
+type="text"
+id="subject"
+placeholder="Email Subject">
+
+</div>
+
+<div
+class="input-group"
+id="recipientNameBox">
+
+<label>
+
+Recipient Name
+
+</label>
+
+<input
+type="text"
+id="recipientName"
+placeholder="Recipient Name">
+
+</div>
+
+<div class="toolbar">
+
+<button type="button" id="h1Btn">H1</button>
+
+<button type="button" id="h2Btn">H2</button>
+
+<button type="button" id="h3Btn">H3</button>
+
+<button type="button" id="boldBtn"><b>B</b></button>
+
+<button type="button" id="italicBtn"><i>I</i></button>
+
+<button type="button" id="linkBtn">Link</button>
+
+<button type="button" id="imageBtn">Image</button>
+
+<button type="button" id="listBtn">- List</button>
+
+<button type="button" id="numberBtn">1. List</button>
+
+<button type="button" id="quoteBtn">Quote</button>
+
+<button type="button" id="codeBtn">&lt;/&gt; Code</button>
+
+<button type="button" id="tableBtn">Table</button>
+
+</div>
+
+<textarea
+id="markdown"
+rows="18"
+placeholder="Write your email using Markdown..."></textarea>
+
+<!-- ==========================================
+BUTTON
+========================================== -->
+
+<div class="button-row">
+
+<div class="input-half">
+
+<label>
+
+Button Text (Optional)
+
+</label>
+
+<input
+type="text"
+id="buttonText"
+placeholder="Example : Visit Website">
+
+</div>
+
+<div class="input-half">
+
+<label>
+
+Button Link (Optional)
+
+</label>
+
+<input
+type="text"
+id="buttonLink"
+placeholder="https://example.com">
+
+</div>
+
+</div>
+
+<div class="composer-actions">
+
+<button
+type="button"
+id="saveDraftBtn"
+class="secondary-button">
+
+Save Draft
+
+</button>
+
+<label class="schedule-field">
+
+<span>
+
+Schedule
+
+</span>
+
+<input
+type="datetime-local"
+id="scheduleAt">
+
+</label>
+
+<button
+type="button"
+id="scheduleBtn"
+class="secondary-button">
+
+Schedule Email
+
+</button>
+
+<button
+type="button"
+id="previewBtn">
+
+Preview Email
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ==========================================
+LINK MODAL
+========================================== -->
+
+<div
+class="modal"
+id="linkModal">
+
+<div class="modal-content">
+
+<h2>
+
+Insert Link
+
+</h2>
+
+<div class="input-group">
+
+<label>
+
+Link Text
+
+</label>
+
+<input
+type="text"
+id="linkText"
+placeholder="Open Website">
+
+</div>
+
+<div class="input-group">
+
+<label>
+
+Website URL
+
+</label>
+
+<input
+type="text"
+id="linkUrl"
+placeholder="https://example.com">
+
+</div>
+
+<div class="modal-buttons">
+
+<button
+type="button"
+id="cancelLink">
+
+Cancel
+
+</button>
+
+<button
+type="button"
+id="insertLink">
+
+Insert
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+IMAGE MODAL
+========================================== -->
+
+<div
+class="modal"
+id="imageModal">
+
+<div class="modal-content">
+
+<h2>
+
+Insert Image
+
+</h2>
+
+<div class="input-group">
+
+<label>
+
+Alt Text
+
+</label>
+
+<input
+type="text"
+id="imageAlt"
+placeholder="Image Description">
+
+</div>
+
+<div class="input-group">
+
+<label>
+
+Image URL
+
+</label>
+
+<input
+type="text"
+id="imageUrl"
+placeholder="https://example.com/image.png">
+
+</div>
+
+<div class="modal-buttons">
+
+<button
+type="button"
+id="cancelImage">
+
+Cancel
+
+</button>
+
+<button
+type="button"
+id="insertImage">
+
+Insert
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="supabase.js"></script>
+
+<script src="wizard.js"></script>
+
+<script src="theme.js"></script>
+
+
+</body>
+
+</html>
